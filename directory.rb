@@ -22,26 +22,11 @@ def interactive_menu
   end
 end
 
-def print_header
-	puts "The students of Villains Academy"
-	puts "-------------"
-end
-
-def print_students_list()
-	@students.each do |student|
-		puts "#{student[:name]} (#{student[:cohort]} cohort)"
-	end
-end
-
-def print_footer
-	puts "Overall, we have #{@students.count} great students"
-end
-
 def print_menu
 	puts "1. Input the student"
 	puts "2. Show the students"
 	puts "9. Exit" 
-end	
+end
 
 def show_students
 	print_header
@@ -60,6 +45,21 @@ def process(selection)
 	else
 		puts "I don't know what you mean, try again"
 	end
+end
+
+def print_header
+	puts "The students of Villains Academy"
+	puts "-------------"
+end
+
+def print_students_list()
+	@students.each do |student|
+		puts "#{student[:name]} (#{student[:cohort]} cohort)"
+	end
+end
+
+def print_footer
+	puts "Overall, we have #{@students.count} great students"
 end
 
 interactive_menu
