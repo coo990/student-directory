@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = [] # an empty array accessible to all methods
 
 def print_menu
@@ -32,13 +34,15 @@ def process(selection)
 	end
 end
 
-def input_students
-	puts "Please enter the names of the students"
+def initial_prompt
+  puts "Please enter the names of the students"
 	puts "To finish, just hit return twice"
+end
+
+def input_students
+  initial_prompt
 	name = STDIN.gets.chomp
-	# while the name is not empty, repeat this code
 	while !name.empty? do
-		# add the student hash to the array
 		@students << {name: name, cohort: :november}
 		puts "Now we have #{@students.count} students"
 		# get another name from the user
@@ -69,14 +73,13 @@ end
 
 def save_students
 	#open the file for writing
-	file = File.open("students.csv", "w")
+	CSV.open("students.csv", "wb") do |csv|
 	#iterate over the array of students
-	@students.each do |student|
-		student_data = [student[:name], student[:cohort]]
-		csv_line = student_data.join(",")
-		file.puts csv_line
+	  @students.each do |student|
+	  	student_data = [student[:name], student[:cohort]]
+	  	csv << [student_data.join(",")]
+	  end
 	end
-	file.close
 end
 
 def load_students(filename = "students.csv")
